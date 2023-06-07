@@ -1,0 +1,366 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 9,
+            "content": {
+              "version": "KqlParameterItem/1.0",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "parameters": [
+                {
+                  "id": "51aa3a9b-14e0-4c22-a60d-abdbf8813f00",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "Subscription",
+                  "type": 6,
+                  "isRequired": true,
+                  "multiSelect": true,
+                  "quote": "'",
+                  "delimiter": ",",
+                  "typeSettings": {
+                    "additionalResourceOptions": [
+                      "value::all"
+                    ],
+                    "includeAll": true,
+                    "showDefault": false
+                  },
+                  "timeContext": {
+                    "durationMs": 86400000
+                  },
+                  "defaultValue": "value::all"
+                },
+                {
+                  "id": "27d877de-fd66-4a67-87b4-081894bffe41",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "RG_Filter",
+                  "label": "Filter By",
+                  "type": 2,
+                  "isRequired": true,
+                  "typeSettings": {
+                    "additionalResourceOptions": [],
+                    "showDefault": false
+                  },
+                  "jsonData": "[\r\n    { \"value\":\"Resource Group\",\"selected\":\"true\"},\r\n    { \"value\":\"Tags\" }\r\n]"
+                },
+                {
+                  "id": "3b7465ee-0eb3-419a-abcc-d4569c436df2",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "Location",
+                  "label": "Resource Location",
+                  "type": 2,
+                  "description": "Select the region where the VMs are located. Different Regions might have different SKUs",
+                  "isRequired": true,
+                  "query": "Resources\r\n| where type =~ 'Microsoft.Compute/virtualMachines'\r\n| project name, location\r\n| summarize count () by location\r\n| project location\r\n",
+                  "crossComponentResources": [
+                    "{Subscription}"
+                  ],
+                  "typeSettings": {
+                    "additionalResourceOptions": [
+                      "value::1"
+                    ],
+                    "showDefault": false
+                  },
+                  "defaultValue": "value::1",
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources"
+                },
+                {
+                  "id": "2336f06b-ddaa-4a9e-b72f-a2bec1ea84a9",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "SingleSubHidden",
+                  "type": 1,
+                  "isRequired": true,
+                  "query": "resourcecontainers\r\n| where type==\"microsoft.resources/subscriptions\"\r\n| take 1\r\n| project subscriptionId",
+                  "crossComponentResources": [
+                    "{Subscription}"
+                  ],
+                  "isHiddenWhenLocked": true,
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources"
+                }
+              ],
+              "style": "pills",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources"
+            },
+            "conditionalVisibility": {
+              "parameterName": "SelectedTab",
+              "comparison": "isNotEqualTo",
+              "value": "CostInformation"
+            },
+            "name": "parameters - 0"
+          },
+          {
+            "type": 9,
+            "content": {
+              "version": "KqlParameterItem/1.0",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "parameters": [
+                {
+                  "id": "6cb303fd-4812-4097-a468-a177d8782913",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "ResourceGroup",
+                  "label": "Resource Group",
+                  "type": 2,
+                  "multiSelect": true,
+                  "quote": "'",
+                  "delimiter": ",",
+                  "query": "resourceContainers | where type == 'microsoft.resources/subscriptions/resourcegroups'\r\n| project resourceGroup\r\n| sort by resourceGroup asc",
+                  "crossComponentResources": [
+                    "{Subscription}"
+                  ],
+                  "typeSettings": {
+                    "additionalResourceOptions": [
+                      "value::all"
+                    ],
+                    "showDefault": false
+                  },
+                  "timeContext": {
+                    "durationMs": 86400000
+                  },
+                  "defaultValue": "value::all",
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources",
+                  "value": [
+                    "value::all"
+                  ]
+                }
+              ],
+              "style": "pills",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources"
+            },
+            "conditionalVisibilities": [
+              {
+                "parameterName": "RG_Filter",
+                "comparison": "isEqualTo",
+                "value": "Resource Group"
+              },
+              {
+                "parameterName": "SelectedTab",
+                "comparison": "isNotEqualTo",
+                "value": "General"
+              },
+              {
+                "parameterName": "SelectedTab",
+                "comparison": "isNotEqualTo",
+                "value": "CostInformation"
+              }
+            ],
+            "name": "parameters - 2"
+          },
+          {
+            "type": 9,
+            "content": {
+              "version": "KqlParameterItem/1.0",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "parameters": [
+                {
+                  "id": "df2a5339-2dd6-478a-a2b1-2dce7651ed0a",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "TagName",
+                  "label": "Tag Name",
+                  "type": 2,
+                  "isRequired": true,
+                  "query": "Resources\r\n| where tags != '' and tags != '[]'\r\n| mvexpand tags\r\n| extend tagName = tostring(bag_keys(tags)[0])\r\n| distinct tagName\r\n| sort by tagName asc",
+                  "crossComponentResources": [
+                    "{Subscription}"
+                  ],
+                  "value": "ssv2excludevm",
+                  "typeSettings": {
+                    "additionalResourceOptions": [],
+                    "showDefault": false
+                  },
+                  "timeContext": {
+                    "durationMs": 86400000
+                  },
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources"
+                }
+              ],
+              "style": "pills",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources"
+            },
+            "customWidth": "20",
+            "conditionalVisibilities": [
+              {
+                "parameterName": "RG_Filter",
+                "comparison": "isEqualTo",
+                "value": "Tags"
+              },
+              {
+                "parameterName": "SelectedTab",
+                "comparison": "isNotEqualTo",
+                "value": "General"
+              }
+            ],
+            "name": "parameters - 3"
+          },
+          {
+            "type": 9,
+            "content": {
+              "version": "KqlParameterItem/1.0",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "parameters": [
+                {
+                  "id": "d28a3428-b806-4716-a4c5-9f9816224aef",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "TagValue",
+                  "type": 2,
+                  "isRequired": true,
+                  "query": "Resources\r\n| mvexpand tags\r\n| extend tagName = tostring(bag_keys(tags)[0])\r\n| extend tagValue = tostring(tags[tagName])\r\n| where tags != '' and tags != '[]' and tostring(bag_keys(tags)[0]) == '{TagName}'\r\n| distinct tagValue\r\n| sort by tagValue asc",
+                  "crossComponentResources": [
+                    "{Subscription}"
+                  ],
+                  "value": "true",
+                  "typeSettings": {
+                    "additionalResourceOptions": []
+                  },
+                  "timeContext": {
+                    "durationMs": 86400000
+                  },
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources"
+                }
+              ],
+              "style": "pills",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources"
+            },
+            "customWidth": "20",
+            "conditionalVisibilities": [
+              {
+                "parameterName": "SelectedTab",
+                "comparison": "isNotEqualTo",
+                "value": "General"
+              },
+              {
+                "parameterName": "RG_Filter",
+                "comparison": "isEqualTo",
+                "value": "Tags"
+              },
+              {
+                "parameterName": "TagName",
+                "comparison": "isNotEqualTo"
+              }
+            ],
+            "name": "parameters - 13"
+          },
+          {
+            "type": 11,
+            "content": {
+              "version": "LinkItem/1.0",
+              "style": "tabs",
+              "links": [
+                {
+                  "id": "02e6ccd6-a138-477d-b507-f1ace41b28c6",
+                  "cellValue": "SelectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Welcome",
+                  "subTarget": "Welcome",
+                  "style": "link"
+                },
+                {
+                  "id": "ca40468d-4518-43bf-ac6e-0a11d7331e12",
+                  "cellValue": "SelectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Reservations Recommendations",
+                  "subTarget": "General",
+                  "style": "link"
+                },
+                {
+                  "id": "34014531-76a5-4eab-9772-9944fa241fea",
+                  "cellValue": "SelectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Azure Hybrid Benefit",
+                  "subTarget": "AHUB",
+                  "style": "link"
+                },
+                {
+                  "id": "96d6402c-ff6c-4cf8-961d-8fbe5c98be60",
+                  "cellValue": "SelectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Compute",
+                  "subTarget": "Compute",
+                  "preText": "VirtualMachines",
+                  "style": "link"
+                },
+                {
+                  "id": "4f4786a7-c2df-4788-b5b6-63057bc0c24a",
+                  "cellValue": "SelectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Disks",
+                  "subTarget": "Storage",
+                  "style": "link"
+                },
+                {
+                  "id": "feefdffe-9b9b-4480-a0dd-3a2751cab365",
+                  "cellValue": "SelectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Cost Information",
+                  "subTarget": "CostInformation",
+                  "style": "link"
+                }
+              ]
+            },
+            "name": "links - 4"
+          }
+        ],
+        "exportParameters": true
+      },
+      "name": "Parameters"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "template",
+        "title": "Welcome",
+        "expandable": true,
+        "expanded": true,
+        "loadFromTemplateId": "",
+        "items": []
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "Welcome"
+      },
+      "name": "Welcome"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "template",
+        "title": "Compute",
+        "loadFromTemplateId": "/subscriptions/1283e053-2e46-449f-87d6-842ef6df3272/resourceGroups/core/providers/microsoft.insights/workbooks/d4d1cf67-3047-48ac-b2be-5a6da5491033",
+        "items": []
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "Compute"
+      },
+      "name": "Compute"
+    }
+  ],
+  "fallbackResourceIds": [
+    "Azure Monitor"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
