@@ -3,7 +3,7 @@
 ## Welcome to the **cost optimization workbook**. 
 The objective of this workbook is to provide a comprehensive overview of the cost posture of your Azure environment. It offers cost-relevant insights aligned with the WAF Cost Optimization pillar and has the capability to identify and apply recommendations to optimize costs.
 
-This workbook has the following tabs [Get Started](/workbook/modular/modules/WelcomeGroup.json), [Compute](/workbook/modular/modules/Compute.json), [Azure Hybrid Benefit](/workbook/modular/modules/AHUB.json), [Storage](/workbook/modular/modules/storage.json), [Networking](/workbook/modular/modules/Networking.json).
+This workbook has the following tabs [Get Started](/workbook/modules/GetStarted), [Compute](/workbook/modules/Compute), [Azure Hybrid Benefit](/workbook/modules/AHUB), [Storage](/workbook/modules/Storage), [Networking](/workbook/modules/Networking).
 
 
 <figure>

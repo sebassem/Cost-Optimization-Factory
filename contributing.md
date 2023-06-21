@@ -24,7 +24,7 @@ If you want to contribute code changes, but aren't sure where to start, scan thr
 
 If you find an issue that's assigned to someone, add a comment to check their status – there's a chance they may not have started yet. If you find an issue that isn't assigned, you are welcome to open a PR with a fix.
 
-When you are opening a PR, make sure to make the change to the respective txt file where all the queries are. For example, if you want to add a new query to the Compute tab, add your query to the [compute.txt](/workbook/modular/modules/Compute.txt) 
+When you are opening a PR, make sure to make the change to the respective txt file where all the queries are. For example, if you want to add a new query to the Compute tab, add your query to the [compute.txt](/workbook/modules/Compute/compute.txt) 
 
 <br>
 
