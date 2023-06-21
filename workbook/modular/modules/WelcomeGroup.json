@@ -3,19 +3,19 @@
   "content": {
     "version": "NotebookGroup/1.0",
     "groupType": "editable",
-    "title": "Welcome",
+    "title": "Welcome group",
     "items": [
       {
         "type": 1,
         "content": {
-          "json": "# Welcome to the Cost Optimization Workbook"
+          "json": "# Welcome the cost optimization workbook"
         },
         "name": "text - 6"
       },
       {
         "type": 1,
         "content": {
-          "json": "### Reference: [Microsoft Azure Well-Architected Framework - Cost Optimization Pillar](https://learn.microsoft.com/en-us/azure/architecture/framework/cost/overview)",
+          "json": "### Reference: [Microsoft Azure Well-Architected Framework - cost optimization pillar](https://learn.microsoft.com/en-us/azure/architecture/framework/cost/overview)",
           "style": "upsell"
         },
         "name": "text - 5"
@@ -23,7 +23,7 @@
       {
         "type": 1,
         "content": {
-          "json": "The objective of this workbook is to provide an overview of the Cost posture of your Azure environment. The workbook is to be used as guidance only, and does not represent a guarantee of any Cost Reduction.\r\n\r\n## Overview of the cost optimization pillar\r\n\r\n* The cost optimization pillar provides principles for balancing business goals with budget justification to create a cost-effective workload while avoiding capital-intensive solutions. Cost optimization is about looking at ways to reduce unnecessary expenses and improve operational efficiencies.\r\n\r\n* To assess your workload using the tenets found in the [Microsoft Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/architecture/framework/), reference the [Microsoft Azure Well-Architected Review](https://learn.microsoft.com/en-us/assessments/?id=azure-architecture-review&mode=pre-assessment&session=20dc50e4-5b71-4f38-bc49-51cc1d9f205c).\r\n\r\n\r\n\r\n\r\n"
+          "json": "The objective of this workbook is to provide a comprehensive overview of the cost posture of your Azure environment. It offers cost-relevant insights aligned with the WAF Cost Optimization pillar and has the capability to identify and apply recommendations to optimize costs. It's important to note that the workbook serves as guidance and does not guarantee cost reduction.\r\n\r\n## Overview of the cost optimization pillar\r\n\r\n* The cost optimization pillar provides principles for balancing business goals with budget justification to create a cost-effective workload while avoiding capital-intensive solutions.It emphasizes the importance of reducing unnecessary expenses and improving operational efficiencies.\r\n\r\n* To assess your workload based on the principles outlined in the [Microsoft Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/architecture/framework/), reference the [Microsoft Azure Well-Architected Review](https://learn.microsoft.com/en-us/assessments/?id=azure-architecture-review&mode=pre-assessment&session=20dc50e4-5b71-4f38-bc49-51cc1d9f205c) tool.\r\n\r\n\r\n\r\n\r\n"
         },
         "name": "text - 0"
       },
@@ -56,17 +56,9 @@
       {
         "type": 1,
         "content": {
-          "json": "## RBAC Needed\r\n\r\nThis workbook will present various cost-related details in the form of governance, networking, storage, VMs, Webapps, SQL, and cost information to educate the business about cost related to various resources.\r\n\r\n\r\n* Consider the following least-privilege (minimum) RBAC permissions when deploying the workbook:\r\n\r\n  * **Reader** , **Billing Reader** and **Workbook Contributor** : allows you to import the workbook, view all of the workbook tabs including the *Cost Information* tab and save the workbook in a resource group.\r\n  * **Reader** and **Workbook Contributor** : allows you to import the workbook, view all of the workbook tabs except the *Cost Information* tab and save the workbook in a resource group.\r\n  * **Reader** : allows you to import the workbook and view all of the workbook tabs except the *Cost Information* tab.\r\n\r\n\r\n"
+          "json": "## Prerequisites\r\n\r\nThis workbook will present various cost-related details in the form of governance, networking, storage, VMs, Webapps, SQL, and cost information to educate the business about cost related to various resources.\r\n\r\nThis workbook requires the following least-privileged (minimum) roles:\r\n\r\n  * **Reader** : allows you to import the workbook without saving it and view all of the workbook tabs except the *Cost Information* tab.\r\n  * **Cost Management Reader**: allows you to view the costs of idle resources in the *Cost information* tab \r\n  * **Workbook Contributor** : allows you to import and save the workbook\r\n\r\n\r\n\r\n"
         },
         "name": "text - 3"
-      },
-      {
-        "type": 1,
-        "content": {
-          "json": "  > The **Cost Information** tab only works with one subscription at the time.",
-          "style": "info"
-        },
-        "name": "text - 4"
       }
     ]
   },
