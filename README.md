@@ -9,7 +9,7 @@ This workbook has the following tabs [Get Started](/workbook/modular/modules/Wel
 
 ## 👩‍💻 Contributing
 
-There are many ways to participate. From reporting bugs and requesting features or even making code changes. See the [contribution guide ➡️](./CONTRIBUTING.md)
+There are many ways to participate. From reporting bugs and requesting features or even making code changes. See the [contribution guide ➡️](./contributing.md)
 
 
 
