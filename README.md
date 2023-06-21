@@ -13,7 +13,7 @@ This workbook has the following tabs [Get Started](/workbook/modules/GetStarted)
 
 ## 👩‍💻 Contributing
 
-There are many ways to participate. From reporting bugs and requesting features or even making code changes. See the [contribution guide ➡️](./contributing.md)
+There are many ways to participate. From reporting bugs and requesting features or even making code changes. See the [contribution guide ➡️](./contributing.md) .
 
 
 
