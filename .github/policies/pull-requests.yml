@@ -1,0 +1,35 @@
+name: PR lifecycle
+description: Pull request lifecycle
+resource: repository
+
+configuration:
+  fabricBotConfiguration:
+    eventResponderTasks:
+      - if:
+          - payloadType: Pull_Request
+          - and:
+                  - isAction:
+                      action: Opened
+                  - isAction:
+                      action: Synchronize
+        then:
+          - addLabel:
+              label: 'Needs: Review 👀'
+          - assignTo:
+              user: arthurclares
+          - assignTo:
+              user: sebassem
+      - if:
+          - payloadType: Pull_Request
+          - and:
+              - isActivitySender:
+                  issueAuthor: true
+              - isAction:
+                  action: Synchronize
+              - hasLabel:
+                  label: 'Needs: Attention 👋'
+        then:
+          - removeLabel:
+              label: 'Needs: Attention 👋'
+          - addLabel:
+              label: 'Needs: Review 👀'
