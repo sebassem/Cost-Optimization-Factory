@@ -1,0 +1,313 @@
+{
+    "type": 12,
+    "content": {
+      "version": "NotebookGroup/1.0",
+      "groupType": "editable",
+      "title": "Networking Group",
+      "items": [
+        {
+          "type": 12,
+          "content": {
+            "version": "NotebookGroup/1.0",
+            "groupType": "editable",
+            "items": [
+              {
+                "type": 3,
+                "content": {
+                  "version": "KqlItem/1.0",
+                  "query": "advisorresources\r\n| where type == \"microsoft.advisor/recommendations\"\r\n| where tostring (properties.category) has \"Cost\"\r\n| where properties.impactedField has \"Network\"\r\n| project AffectedResource=tostring(properties.resourceMetadata.resourceId),Impact=properties.impact,resourceGroup,AdditionaInfo=properties.extendedProperties,subscriptionId,Recommendation=tostring(properties.shortDescription.problem),name\r\n| where resourceGroup in ({ResourceGroup})",
+                  "size": 0,
+                  "title": "Azure advisor recommendations - Networking",
+                  "noDataMessage": "You are following all of our cost recommendations for Networking",
+                  "noDataMessageStyle": 3,
+                  "showExportToExcel": true,
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources",
+                  "crossComponentResources": [
+                    "{Subscription}"
+                  ],
+                  "gridSettings": {
+                    "hierarchySettings": {
+                      "treeType": 1,
+                      "groupBy": [
+                        "Recommendation"
+                      ],
+                      "expandTopLevel": true
+                    }
+                  }
+                },
+                "name": "query - 12"
+              },
+              {
+                "type": 1,
+                "content": {
+                  "json": "# Recommendations for Application Gateways\r\nReview Application Gateways which include backend pools with no targets. Resources listed with 2 red signs are considered idle.",
+                  "style": "upsell"
+                },
+                "name": "text - 0"
+              },
+              {
+                "type": 3,
+                "content": {
+                  "version": "KqlItem/1.0",
+                  "query": "resources\r\n| where type =~ 'Microsoft.Network/applicationGateways' and resourceGroup in ({ResourceGroup})\r\n| extend backendPoolsCount = array_length(properties.backendAddressPools),SKUName= tostring(properties.sku.name), SKUTier= tostring(properties.sku.tier),SKUCapacity=properties.sku.capacity,backendPools=properties.backendAddressPools\r\n| project id, name, SKUName, SKUTier, SKUCapacity\r\n| join (\r\n    resources\r\n    | where type =~ 'Microsoft.Network/applicationGateways' and resourceGroup in ({ResourceGroup})\r\n    | mvexpand backendPools = properties.backendAddressPools\r\n    | extend backendIPCount = array_length(backendPools.properties.backendIPConfigurations)\r\n    | extend backendAddressesCount = array_length(backendPools.properties.backendAddresses)\r\n    | extend backendPoolName  = backendPools.properties.backendAddressPools.name\r\n    | summarize backendIPCount = sum(backendIPCount) ,backendAddressesCount=sum(backendAddressesCount) by id\r\n) on id\r\n| project-away id1\r\n| where  (backendIPCount == 0 or isempty(backendIPCount)) and (backendAddressesCount==0 or isempty(backendAddressesCount))\r\n| order by id asc\r\n| join kind = innerunique(\r\n    resources\r\n    | extend replaced_tags = replace('{}', 'null', tostring(tags))\r\n    | extend replaced_tags = parse_json(replaced_tags)\r\n    | mv-expand replaced_tags\r\n    | extend tagName = tostring(bag_keys(replaced_tags)[0])\r\n    | extend tagValue = tostring(replaced_tags['{TagName}'])\r\n    | where tagName has '{TagName}' and tagValue has '{TagValue}'\r\n    | distinct id\r\n    )\r\n    on id",
+                  "size": 0,
+                  "title": "Application gateways with empty backend pools",
+                  "noDataMessage": "You don't have any Application Gateways with empty backendpools",
+                  "noDataMessageStyle": 3,
+                  "showExportToExcel": true,
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources",
+                  "crossComponentResources": [
+                    "{Subscription}"
+                  ],
+                  "gridSettings": {
+                    "formatters": [
+                      {
+                        "columnMatch": "SKUCapacity",
+                        "formatter": 1
+                      },
+                      {
+                        "columnMatch": "backendIPCount",
+                        "formatter": 18,
+                        "formatOptions": {
+                          "thresholdsOptions": "icons",
+                          "thresholdsGrid": [
+                            {
+                              "operator": "==",
+                              "thresholdValue": "0",
+                              "representation": "disabled",
+                              "text": ""
+                            },
+                            {
+                              "operator": ">",
+                              "thresholdValue": "0",
+                              "representation": "success",
+                              "text": "{0}{1}"
+                            },
+                            {
+                              "operator": "Default",
+                              "thresholdValue": null,
+                              "representation": "success",
+                              "text": "{0}{1}"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "columnMatch": "backendAddressesCount",
+                        "formatter": 18,
+                        "formatOptions": {
+                          "thresholdsOptions": "icons",
+                          "thresholdsGrid": [
+                            {
+                              "operator": "==",
+                              "thresholdValue": "0",
+                              "representation": "disabled",
+                              "text": ""
+                            },
+                            {
+                              "operator": ">",
+                              "thresholdValue": "0",
+                              "representation": "success",
+                              "text": "{0}{1}"
+                            },
+                            {
+                              "operator": "Default",
+                              "thresholdValue": null,
+                              "representation": "success",
+                              "text": "{0}{1}"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "columnMatch": "Recommendation",
+                        "formatter": 18,
+                        "formatOptions": {
+                          "thresholdsOptions": "colors",
+                          "thresholdsGrid": [
+                            {
+                              "operator": "==",
+                              "thresholdValue": "No Backend targets",
+                              "representation": "redBright",
+                              "text": "{0}{1}"
+                            },
+                            {
+                              "operator": "Default",
+                              "thresholdValue": null,
+                              "representation": "green",
+                              "text": "{0}{1}"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "columnMatch": "backendPoolIPTarget",
+                        "formatter": 18,
+                        "formatOptions": {
+                          "thresholdsOptions": "icons",
+                          "thresholdsGrid": [
+                            {
+                              "operator": ">",
+                              "thresholdValue": "0",
+                              "representation": "success",
+                              "text": ""
+                            },
+                            {
+                              "operator": "==",
+                              "thresholdValue": "0",
+                              "representation": "disabled",
+                              "text": ""
+                            },
+                            {
+                              "operator": "Default",
+                              "thresholdValue": null,
+                              "representation": "success",
+                              "text": "{0}{1}"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "columnMatch": "backendPoolVMTarget",
+                        "formatter": 18,
+                        "formatOptions": {
+                          "thresholdsOptions": "icons",
+                          "thresholdsGrid": [
+                            {
+                              "operator": "is Empty",
+                              "representation": "disabled",
+                              "text": ""
+                            },
+                            {
+                              "operator": ">",
+                              "thresholdValue": "0",
+                              "representation": "success",
+                              "text": ""
+                            },
+                            {
+                              "operator": "Default",
+                              "thresholdValue": null,
+                              "representation": "success",
+                              "text": "{0}{1}"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "columnMatch": "Recommednation",
+                        "formatter": 18,
+                        "formatOptions": {
+                          "thresholdsOptions": "colors",
+                          "thresholdsGrid": [
+                            {
+                              "operator": "==",
+                              "thresholdValue": "No Backend targets",
+                              "representation": "redBright",
+                              "text": "{0}{1}"
+                            },
+                            {
+                              "operator": "Default",
+                              "thresholdValue": null,
+                              "representation": "green",
+                              "text": "{0}{1}"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "name": "Get-Idle-AppGW"
+              },
+              {
+                "type": 1,
+                "content": {
+                  "json": "# Recommendations for Load Balancers\r\nReview Load balancers with no backend pools, and remove them if not needed.",
+                  "style": "upsell"
+                },
+                "name": "text - 2"
+              },
+              {
+                "type": 3,
+                "content": {
+                  "version": "KqlItem/1.0",
+                  "query": "resources \r\n| where resourceGroup in ({ResourceGroup})\r\n| where type =~ 'microsoft.network/loadbalancers' and tostring(properties.backendAddressPools) == '[]' \r\n| extend LBRG=resourceGroup, LoadBalancerName=name, SKU=sku, LBLocation=location\r\n| order by id asc\r\n| project id,LoadBalancerName, SKU.name,SKU.tier, LBLocation,LBRG, subscriptionId\r\n| join kind = innerunique(\r\n    resources\r\n    | extend replaced_tags = replace('{}', 'null', tostring(tags))\r\n    | extend replaced_tags = parse_json(replaced_tags)\r\n    | mv-expand replaced_tags\r\n    | extend tagName = tostring(bag_keys(replaced_tags)[0])\r\n    | extend tagValue = tostring(replaced_tags['{TagName}'])\r\n    | where tagName has '{TagName}' and tagValue has '{TagValue}'\r\n    | distinct id\r\n    )\r\n    on id",
+                  "size": 0,
+                  "title": "Load Balancers with empty backend pools",
+                  "showExportToExcel": true,
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources",
+                  "crossComponentResources": [
+                    "{Subscription}"
+                  ],
+                  "gridSettings": {
+                    "formatters": [
+                      {
+                        "columnMatch": "subscriptionId",
+                        "formatter": 15,
+                        "formatOptions": {
+                          "linkTarget": null,
+                          "showIcon": true
+                        }
+                      }
+                    ]
+                  }
+                },
+                "name": "Get-Idle-LB"
+              },
+              {
+                "type": 1,
+                "content": {
+                  "json": "# Recommendations for Public IP Addresses\r\nReview unattached Public IP addresses, as they may represent additional cost.\r\n<br>This query will also show Public IPs attached to Idle network cards.\r\n",
+                  "style": "upsell"
+                },
+                "name": "text - 4"
+              },
+              {
+                "type": 3,
+                "content": {
+                  "version": "KqlItem/1.0",
+                  "query": "resources \r\n| where resourceGroup in ({ResourceGroup})\r\n| where type =~ 'Microsoft.Network/publicIPAddresses' and isempty(properties.ipConfiguration) and isempty(properties.natGateway) \r\n| extend PublicIpId=id, IPName=name, AllocationMethod=tostring(properties.publicIPAllocationMethod), SKUName=sku.name, Location=location \r\n| project PublicIpId,IPName, SKUName, resourceGroup, Location, AllocationMethod, subscriptionId\r\n| union (\r\n Resources \r\n | where type =~ 'microsoft.network/networkinterfaces' and isempty(properties.virtualMachine) and isnull(properties.privateEndpoint) and isnotempty(properties.ipConfigurations) \r\n | extend IPconfig = properties.ipConfigurations \r\n | mv-expand IPconfig \r\n | extend PublicIpId= tostring(IPconfig.properties.publicIPAddress.id)\r\n | project PublicIpId\r\n | join ( \r\n    resources \r\n    | where type =~ 'Microsoft.Network/publicIPAddresses'\r\n    | extend PublicIpId=id, IPName=name, AllocationMethod=tostring(properties.publicIPAllocationMethod), SKUName=sku.name, resourceGroup, Location=location \r\n ) on PublicIpId\r\n | project PublicIpId,IPName, SKUName, resourceGroup, Location, AllocationMethod, subscriptionId\r\n)\r\n| join kind = innerunique(\r\n    resources\r\n    | extend replaced_tags = replace('{}', 'null', tostring(tags))\r\n    | extend replaced_tags = parse_json(replaced_tags)\r\n    | mv-expand replaced_tags\r\n    | extend tagName = tostring(bag_keys(replaced_tags)[0])\r\n    | extend tagValue = tostring(replaced_tags['{TagName}'])\r\n    | where tagName has '{TagName}' and tagValue has '{TagValue}'\r\n    | extend PublicIpId=id\r\n    | distinct PublicIpId\r\n    )\r\n    on PublicIpId\r\n",
+                  "size": 0,
+                  "title": "Unattached Public IPs",
+                  "noDataMessage": "You have no unattached Public IPs",
+                  "noDataMessageStyle": 3,
+                  "showExportToExcel": true,
+                  "queryType": 1,
+                  "resourceType": "microsoft.resourcegraph/resources",
+                  "crossComponentResources": [
+                    "{Subscription}"
+                  ],
+                  "gridSettings": {
+                    "formatters": [
+                      {
+                        "columnMatch": "subscriptionId",
+                        "formatter": 15,
+                        "formatOptions": {
+                          "linkTarget": null,
+                          "showIcon": true
+                        }
+                      }
+                    ]
+                  }
+                },
+                "name": "Get-Idle-PIP"
+              }
+            ]
+          },
+          "name": "networking - Subscription"
+        }
+      ]
+    },
+    "conditionalVisibility": {
+      "parameterName": "SelectedTab",
+      "comparison": "isEqualTo",
+      "value": "Networking"
+    },
+    "name": "NetworkingGroup",
+    "styleSettings": {
+      "showBorder": true
+    }
+  }
