@@ -6,6 +6,10 @@ The objective of this workbook is to provide a comprehensive overview of the cos
 This workbook has the following tabs [Get Started](/workbook/modular/modules/WelcomeGroup.json), [Compute](/workbook/modular/modules/Compute.json), [Azure Hybrid Benefit](/workbook/modular/modules/AHUB.json), [Storage](/workbook/modular/modules/storage.json), [Networking](/workbook/modular/modules/Networking.json).
 
 
+<figure>
+    <img src="workbook/images/Welcome.jpg" alt="Cost Optimization workbook Welcome page showing all the other tabs.">
+</figure>
+
 
 ## 👩‍💻 Contributing
 
