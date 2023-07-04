@@ -214,7 +214,6 @@
             "defaultValue": "value::1",
             "queryType": 1,
             "resourceType": "microsoft.resourcegraph/resources",
-            "value": "northeurope",
             "label": "Resource Location"
           }
         ],
@@ -526,6 +525,51 @@
                     }
                   },
                   "name": "Get-Idle-PIP"
+                },
+                {
+                  "type": 1,
+                  "content": {
+                    "json": "# Recommendations for Virtual Network Gateways\r\nReview idle Virtual Network Gateways that have no connections defined, as they may represent additional cost.\r\n",
+                    "style": "upsell"
+                  },
+                  "name": "Recommendations for PIP - Copy"
+                },
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "resources\r\n| where type == \"microsoft.network/virtualnetworkgateways\"\r\n| project id\r\n| join kind = leftouter(\r\n    resources\r\n    | where type == \"microsoft.network/connections\"\r\n    | extend id = tostring(properties.virtualNetworkGateway1.id)\r\n    | project id\r\n    | union (\r\n         resources\r\n         | where type == \"microsoft.network/connections\"\r\n         | extend id = tostring(properties.virtualNetworkGateway2.id)\r\n         | project id\r\n    )\r\n) on id\r\n| where isempty(id1)\r\n| project id, status=id",
+                    "size": 0,
+                    "title": "Idle Virtual Network Gateways",
+                    "noDataMessage": "No Idle Virtual Network Gateways found",
+                    "noDataMessageStyle": 3,
+                    "queryType": 1,
+                    "resourceType": "microsoft.resourcegraph/resources",
+                    "crossComponentResources": [
+                      "{Subscription}"
+                    ],
+                    "gridSettings": {
+                      "formatters": [
+                        {
+                          "columnMatch": "status",
+                          "formatter": 18,
+                          "formatOptions": {
+                            "thresholdsOptions": "icons",
+                            "thresholdsGrid": [
+                              {
+                                "operator": "Default",
+                                "thresholdValue": null,
+                                "representation": "warning",
+                                "text": ""
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "filter": true
+                    }
+                  },
+                  "name": "query - Idel Virtual Network gateways"
                 }
               ]
             },
@@ -1232,7 +1276,7 @@
                   },
                   "queryType": 1,
                   "resourceType": "microsoft.resourcegraph/resources",
-                  "value": "uksouth",
+                  "value": null,
                   "label": "SKU Location"
                 },
                 {
