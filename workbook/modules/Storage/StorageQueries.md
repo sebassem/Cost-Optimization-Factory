@@ -99,7 +99,7 @@ Azure Resource Graph
 resources
 | where type == 'microsoft.compute/snapshots'
 | where resourceGroup in ({ResourceGroup})
-| extend TimeCreated = properties.timeCreated
+| extend TimeCreated = tostring(properties.timeCreated)
 | where TimeCreated < ago(30d)
 | order by id asc
 | project id, resourceGroup, location, TimeCreated ,subscriptionId

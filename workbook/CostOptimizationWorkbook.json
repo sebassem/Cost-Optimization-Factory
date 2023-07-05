@@ -234,7 +234,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "editable",
-        "title": "Networking Group",
+        "title": "",
         "items": [
           {
             "type": 12,
@@ -592,14 +592,14 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "editable",
-        "title": "Storage Group",
+        "title": "",
         "items": [
           {
             "type": 12,
             "content": {
               "version": "NotebookGroup/1.0",
               "groupType": "editable",
-              "title": "StorageGroup",
+              "title": "",
               "items": [
                 {
                   "type": 12,
@@ -780,7 +780,7 @@
                         "type": 3,
                         "content": {
                           "version": "KqlItem/1.0",
-                          "query": "resources\r\n| where type == 'microsoft.compute/snapshots'\r\n| where resourceGroup in ({ResourceGroup})\r\n| extend TimeCreated = properties.timeCreated\r\n| where TimeCreated < ago(30d)\r\n| order by id asc \r\n| project id, resourceGroup, location, TimeCreated ,subscriptionId\r\n| join kind = innerunique(\r\n    resources\r\n    | extend replaced_tags = replace('{}', 'null', tostring(tags))\r\n    | extend replaced_tags = parse_json(replaced_tags)\r\n    | mv-expand replaced_tags\r\n    | extend tagName = tostring(bag_keys(replaced_tags)[0])\r\n    | extend tagValue = tostring(replaced_tags['{TagName}'])\r\n    | where tagName has '{TagName}' and tagValue has '{TagValue}'\r\n    | distinct id\r\n    )\r\n    on id",
+                          "query": "resources\r\n| where type == 'microsoft.compute/snapshots'\r\n| where resourceGroup in ({ResourceGroup})\r\n| extend TimeCreated = properties.timeCreated\r\n| extend resourceGroup=strcat(\"/subscriptions/\",subscriptionId,\"/resourceGroups/\",resourceGroup)\r\n| where TimeCreated < ago(30d)\r\n| order by id asc \r\n| project id, resourceGroup, location, TimeCreated ,subscriptionId\r\n| join kind = innerunique(\r\n    resources\r\n    | extend replaced_tags = replace('{}', 'null', tostring(tags))\r\n    | extend replaced_tags = parse_json(replaced_tags)\r\n    | mv-expand replaced_tags\r\n    | extend tagName = tostring(bag_keys(replaced_tags)[0])\r\n    | extend tagValue = tostring(replaced_tags['{TagName}'])\r\n    | where tagName has '{TagName}' and tagValue has '{TagValue}'\r\n    | distinct id\r\n    )\r\n    on id",
                           "size": 0,
                           "title": "Disk Snapshots with + 30 Days",
                           "noDataMessage": "No Snapshots with more than 30 days.",
@@ -790,7 +790,35 @@
                           "resourceType": "microsoft.resourcegraph/resources",
                           "crossComponentResources": [
                             "{Subscription}"
-                          ]
+                          ],
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "resourceGroup",
+                                "formatter": 14,
+                                "formatOptions": {
+                                  "linkTarget": null,
+                                  "showIcon": true
+                                }
+                              },
+                              {
+                                "columnMatch": "TimeCreated",
+                                "formatter": 1
+                              },
+                              {
+                                "columnMatch": "subscriptionId",
+                                "formatter": 15,
+                                "formatOptions": {
+                                  "linkTarget": null,
+                                  "showIcon": true
+                                }
+                              },
+                              {
+                                "columnMatch": "id1",
+                                "formatter": 5
+                              }
+                            ]
+                          }
                         },
                         "name": "Get-Old-Snapshots"
                       },
@@ -798,7 +826,7 @@
                         "type": 3,
                         "content": {
                           "version": "KqlItem/1.0",
-                          "query": "resources\r\n| where type == 'microsoft.compute/snapshots'\r\n| where resourceGroup in ({ResourceGroup})\r\n| extend name, resourceGroup, SnapshotLocation=location, TimeCreated=tostring(properties.timeCreated), SourceDisk=tostring(properties.creationData.sourceResourceId),subscriptionId\r\n| project id, name, resourceGroup, SnapshotLocation, TimeCreated=tostring(properties.timeCreated), SourceDisk=tostring(properties.creationData.sourceResourceId), subscriptionId \r\n| join kind=leftouter  (\r\nresources\r\n| where type =~ 'microsoft.compute/disks'\r\n| extend SourceDisk=id ) on SourceDisk\r\n| where isempty(managedBy)\r\n| join kind = innerunique(\r\n    resources\r\n    | extend replaced_tags = replace('{}', 'null', tostring(tags))\r\n    | extend replaced_tags = parse_json(replaced_tags)\r\n    | mv-expand replaced_tags\r\n    | extend tagName = tostring(bag_keys(replaced_tags)[0])\r\n    | extend tagValue = tostring(replaced_tags['{TagName}'])\r\n    | where tagName has '{TagName}' and tagValue has '{TagValue}'\r\n    | distinct id\r\n    )\r\n    on id",
+                          "query": "resources\r\n| where type == 'microsoft.compute/snapshots'\r\n| where resourceGroup in ({ResourceGroup})\r\n| extend name, resourceGroup, TimeCreated=tostring(properties.timeCreated), SourceDisk=tostring(properties.creationData.sourceResourceId),subscriptionId\r\n| extend resourceGroup=strcat(\"/subscriptions/\",subscriptionId,\"/resourceGroups/\",resourceGroup)\r\n| project id, resourceGroup, location, TimeCreated=tostring(properties.timeCreated), SourceDisk=tostring(properties.creationData.sourceResourceId), subscriptionId \r\n| join kind=leftouter  (\r\nresources\r\n| where type =~ 'microsoft.compute/disks'\r\n| extend SourceDisk=id ) on SourceDisk\r\n| where isempty(managedBy)\r\n| join kind = innerunique(\r\n    resources\r\n    | extend replaced_tags = replace('{}', 'null', tostring(tags))\r\n    | extend replaced_tags = parse_json(replaced_tags)\r\n    | mv-expand replaced_tags\r\n    | extend tagName = tostring(bag_keys(replaced_tags)[0])\r\n    | extend tagValue = tostring(replaced_tags['{TagName}'])\r\n    | where tagName has '{TagName}' and tagValue has '{TagValue}'\r\n    | distinct id\r\n    )\r\n    on id",
                           "size": 0,
                           "title": "Snapshots of disks that doesn't exist anymore",
                           "noDataMessage": "There aren't any idle disk snapshot",
@@ -807,7 +835,95 @@
                           "resourceType": "microsoft.resourcegraph/resources",
                           "crossComponentResources": [
                             "{Subscription}"
-                          ]
+                          ],
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "subscriptionId",
+                                "formatter": 15,
+                                "formatOptions": {
+                                  "linkTarget": null,
+                                  "showIcon": true
+                                }
+                              },
+                              {
+                                "columnMatch": "id1",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "subscriptionId1",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "name",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "type",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "tenantId",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "kind",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "resourceGroup1",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "managedBy",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "apiVersion",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "sku",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "plan",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "properties",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "tags",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "identity",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "zones",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "extendedLocation",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "systemData",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "SourceDisk1",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "id2",
+                                "formatter": 5
+                              }
+                            ]
+                          }
                         },
                         "name": "Get-Idle-Snapshot"
                       }
@@ -846,7 +962,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "editable",
-        "title": "Compute Group",
+        "title": "",
         "items": [
           {
             "type": 12,
