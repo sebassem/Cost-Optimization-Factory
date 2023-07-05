@@ -961,7 +961,7 @@
                   "type": 3,
                   "content": {
                     "version": "KqlItem/1.0",
-                    "query": "{\"version\":\"Merge/1.0\",\"merges\":[{\"id\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\",\"mergeType\":\"inner\",\"leftTable\":\"query - AppServiceplandetails\",\"rightTable\":\"query - WebFunctionStatus\",\"leftColumn\":\"planId\",\"rightColumn\":\"AppServicePlan\"}],\"projectRename\":[{\"originalName\":\"[query - AppServiceplandetails].SubscriptionName\",\"mergedName\":\"SubscriptionName\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].type\",\"mergedName\":\"type\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].tenantId\",\"mergedName\":\"tenantId\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].kind\",\"mergedName\":\"kind\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].location\",\"mergedName\":\"location\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].subscriptionId\",\"mergedName\":\"subscriptionId\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].managedBy\",\"mergedName\":\"managedBy\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].sku\",\"mergedName\":\"sku\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].plan\",\"mergedName\":\"plan\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].properties\",\"mergedName\":\"properties\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].tags\",\"mergedName\":\"tags\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].identity\",\"mergedName\":\"identity\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].zones\",\"mergedName\":\"zones\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].extendedLocation\",\"mergedName\":\"extendedLocation\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].planId\",\"mergedName\":\"planId\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].PredictiveAutoscale\",\"mergedName\":\"PredictiveAutoscale\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].AutoScaleProfiles\",\"mergedName\":\"AutoScaleProfiles\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].resourceGroup1\",\"mergedName\":\"resourceGroup1\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - WebFunctionStatus].id\",\"mergedName\":\"id\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - WebFunctionStatus].id1\",\"mergedName\":\"id1\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].name\",\"mergedName\":\"name\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].skuname\",\"mergedName\":\"skuname\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].skutier\",\"mergedName\":\"skutier\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].workers\",\"mergedName\":\"workers\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].maxworkers\",\"mergedName\":\"maxworkers\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].webRG\",\"mergedName\":\"webRG\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].planId1\",\"mergedName\":\"planId1\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].resourceGroup\",\"mergedName\":\"resourceGroup\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].WebAppName\",\"mergedName\":\"WebAppName\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].Type\",\"mergedName\":\"Type\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].Status\",\"mergedName\":\"Status\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].WebAppLocation\",\"mergedName\":\"WebAppLocation\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].AppServicePlan\",\"mergedName\":\"AppServicePlan\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].WebAppRG\",\"mergedName\":\"WebAppRG\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].SubscriptionName\",\"mergedName\":\"SubscriptionName1\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].SubscriptionName\"}]}",
+                    "query": "{\"version\":\"Merge/1.0\",\"merges\":[{\"id\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\",\"mergeType\":\"inner\",\"leftTable\":\"query - AppServiceplandetails\",\"rightTable\":\"query - WebFunctionStatus\",\"leftColumn\":\"planId\",\"rightColumn\":\"AppServicePlan\"}],\"projectRename\":[{\"originalName\":\"[query - AppServiceplandetails].type\",\"mergedName\":\"type\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].tenantId\",\"mergedName\":\"tenantId\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].kind\",\"mergedName\":\"kind\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].location\",\"mergedName\":\"location\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].managedBy\",\"mergedName\":\"managedBy\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].subscriptionId\",\"mergedName\":\"subscriptionId\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].sku\",\"mergedName\":\"sku\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].SubscriptionName\",\"mergedName\":\"SubscriptionName\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].plan\",\"mergedName\":\"plan\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].properties\",\"mergedName\":\"properties\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].tags\",\"mergedName\":\"tags\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].identity\",\"mergedName\":\"identity\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].zones\",\"mergedName\":\"zones\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].extendedLocation\",\"mergedName\":\"extendedLocation\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].planId\",\"mergedName\":\"planId\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - WebFunctionStatus].id\",\"mergedName\":\"id\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].name\",\"mergedName\":\"name\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].Status\",\"mergedName\":\"Status\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].Type\",\"mergedName\":\"Type\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].skuname\",\"mergedName\":\"skuname\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].skutier\",\"mergedName\":\"skutier\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].PredictiveAutoscale\",\"mergedName\":\"PredictiveAutoscale\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].AutoScaleProfiles\",\"mergedName\":\"AutoScaleProfiles\",\"fromId\":\"unknown\"},{\"originalName\":\"[query - AppServiceplandetails].workers\",\"mergedName\":\"workers\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].maxworkers\",\"mergedName\":\"maxworkers\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].webRG\",\"mergedName\":\"webRG\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].planId1\",\"mergedName\":\"planId1\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - AppServiceplandetails].resourceGroup\",\"mergedName\":\"resourceGroup\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].WebAppName\",\"mergedName\":\"WebAppName\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].WebAppLocation\",\"mergedName\":\"WebAppLocation\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].AppServicePlan\",\"mergedName\":\"AppServicePlan\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].WebAppRG\",\"mergedName\":\"WebAppRG\",\"fromId\":\"3fddbdd9-c4eb-46ae-b6b0-654c0da7b1a8\"},{\"originalName\":\"[query - WebFunctionStatus].SubscriptionName\"},{\"originalName\":\"[query - WebFunctionStatus].id1\"},{\"originalName\":\"[query - AppServiceplandetails].resourceGroup1\"}]}",
                     "size": 0,
                     "title": "Web Apps",
                     "noDataMessage": "You have no WebApps!",
@@ -969,6 +969,18 @@
                     "queryType": 7,
                     "gridSettings": {
                       "formatters": [
+                        {
+                          "columnMatch": "name",
+                          "formatter": 1
+                        },
+                        {
+                          "columnMatch": "SubscriptionName",
+                          "formatter": 15,
+                          "formatOptions": {
+                            "linkTarget": null,
+                            "showIcon": true
+                          }
+                        },
                         {
                           "columnMatch": "Status",
                           "formatter": 18,
@@ -997,18 +1009,6 @@
                           }
                         },
                         {
-                          "columnMatch": "SubscriptionName",
-                          "formatter": 15,
-                          "formatOptions": {
-                            "linkTarget": null,
-                            "showIcon": true
-                          }
-                        },
-                        {
-                          "columnMatch": "name",
-                          "formatter": 5
-                        },
-                        {
                           "columnMatch": "webRG",
                           "formatter": 5
                         },
@@ -1027,6 +1027,14 @@
                         {
                           "columnMatch": "AppServicePlan",
                           "formatter": 5
+                        },
+                        {
+                          "columnMatch": "WebAppRG",
+                          "formatter": 14,
+                          "formatOptions": {
+                            "linkTarget": null,
+                            "showIcon": true
+                          }
                         }
                       ],
                       "rowLimit": 1000,

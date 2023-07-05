@@ -1,16 +1,18 @@
 # Networking cost optimization queries
 
-## Idle Application Gateways
+## Azure Application Gateways
 
-### Description
+### Idle Application Gateways
+
+#### Description
 
 This query will get the Application Gateways that have empty backend pools
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 resources
@@ -42,17 +44,19 @@ resources
     on id
 ```
 
-## Idle Load Balancers
+## Azure Load Balancers
 
-### Description
+### Idle Load Balancers
+
+#### Description
 
 This query will get the Load Balancers that have empty backend pools
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 resources
@@ -74,17 +78,19 @@ resources
     on id
 ```
 
-## Idle Public IP addresses
+## Public Ip addresses
 
-### Description
+### Idle Public IP addresses
+
+#### Description
 
 This query will get the Public IP addresses that are not attached to any resource or attached to the Network Card that is not attached to any resource
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 resources
@@ -120,17 +126,19 @@ resources
     on PublicIpId
 ```
 
-## Idle Virtual network gateways
+## Virtual Network Gateways
 
-### Description
+### Idle Virtual Network Gateways
 
-This query will get the Virtual network gateways that have no connections defined
+#### Description
 
-### Query type
+This query will get the Virtual Network Gateways that have no connections defined
+
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 resources

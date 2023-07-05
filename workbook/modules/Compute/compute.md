@@ -1,16 +1,18 @@
 # Compute cost optimization queries
 
-## Azure Advisor cost recommendations for Compute
+## General
 
-### Description
+### Azure Advisor cost recommendations for Compute
+
+#### Description
 
 This query will display all Azure Advisor cost recommendations with Compute resources
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 advisorresources
@@ -21,17 +23,19 @@ advisorresources
 | where resourceGroup in ({ResourceGroup})
 ```
 
-## Stopped Virtual Machines
+## Virtual Machines and Virtual Machine Scale Sets
 
-### Description
+### Stopped Virtual Machines
+
+#### Description
 
 This query will display all Azure Virtual Machines in a stopped state
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 resources
@@ -53,20 +57,20 @@ resources
     on id
 ```
 
-## Virtual Machines and Virtual Machine Scale Sets with Azure Hybrid Benefit not enabled
+### Virtual Machines and Virtual Machine Scale Sets with Azure Hybrid Benefit not enabled
 
-### Description
+#### Description
 
 This query will list all Virtual Machines and Virtual Machine Scale Sets with Azure Hybrid Benefit not enabled
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
-ResourceContainers | where type =~ 'Microsoft.Resources/subscriptions' | where tostring (properties.subscriptionPolicies.quotaId) !has "MSDNDevTest_2014-09-01"  | extend SubscriptionName=name 
+ResourceContainers | where type =~ 'Microsoft.Resources/subscriptions' | where tostring (properties.subscriptionPolicies.quotaId) !has "MSDNDevTest_2014-09-01"  | extend SubscriptionName=name
 | join (
 resources 
 | where resourceGroup in ({ResourceGroup})
@@ -79,17 +83,17 @@ resources
 | project WindowsId,VMName,VMRG,VMSize, VMSSize, VMLocation,OSType, OsVersion,LicenseType, subscriptionId
 ```
 
-## Virtual Machines and Virtual Machine Scale Sets with Azure Hybrid Benefit enabled
+### Virtual Machines and Virtual Machine Scale Sets with Azure Hybrid Benefit enabled
 
-### Description
+#### Description
 
 This query will list all Virtual Machines and Virtual Machine Scale Sets with Azure Hybrid Benefit enabled
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 ResourceContainers | where type =~ 'Microsoft.Resources/subscriptions' | where tostring (properties.subscriptionPolicies.quotaId) !has "MSDNDevTest_2014-09-01"  | extend SubscriptionName=name

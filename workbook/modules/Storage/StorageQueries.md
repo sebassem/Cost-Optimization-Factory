@@ -1,16 +1,18 @@
 # Storage cost optimization queries
 
-## Azure Advisor cost recommendations for Storage
+## General
 
-### Description
+### Azure Advisor cost recommendations for Storage
+
+#### Description
 
 This query will display all Azure Advisor cost recommendations with Storage resources
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 advisorresources
@@ -21,17 +23,19 @@ advisorresources
 | where resourceGroup in ({ResourceGroup})
 ```
 
-## Storage Accounts that are not V2
+## Storage Accounts
 
-### Description
+### Storage Accounts that are not V2
+
+#### Description
 
 This query will list all Storage Accounts that are not of type V2
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 resources
@@ -53,17 +57,19 @@ resources
     on id
 ```
 
-## Unattached Managed Disks
+## Managed Disks
 
-### Description
+### Unattached Managed Disks
+
+#### Description
 
 This query will list all Managed Disks that are not attached to any resource
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 resources
@@ -77,17 +83,17 @@ or diskState == 'Unattached' and diskState != 'ActiveSAS'
 | project DiskId, DiskIDfull, DiskName, DiskSizeGB, SKUName, SKUTier, resourceGroup, QuickFix, Location, TimeCreated, subscriptionId
 ```
 
-## Old Azure Disks snapshots
+### Old Azure Disks snapshots (> 30 days)
 
-### Description
+#### Description
 
 This query will list all snaphshots that are older than 30 days
 
-### Query type
+#### Query type
 
 Azure Resource Graph
 
-### Azure Resource Graph query
+#### Azure Resource Graph query
 
 ```python
 resources
@@ -109,4 +115,3 @@ resources
     )
     on id
 ```
-
