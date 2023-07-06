@@ -13,7 +13,7 @@ This workbook has the following tabs [Get Started](/workbook/modules/GetStarted)
 
 ## Workbook Overview
 
-To learn more about each workbook query and how to work with each one of them, go to the [workbook overview](./workbookoverview.md) page.
+To learn more about each workbook query and how to work with each one of them, go to the [workbook overview](./WorkbookOverview.md) page.
 
 ### List of Queries
 
