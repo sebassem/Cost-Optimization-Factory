@@ -11,6 +11,21 @@ This workbook has the following tabs [Get Started](/workbook/modules/GetStarted)
 </figure>
 
 
+## Workbook Overview
+
+To learn more about each workbook query and how to work with each one of them, go to the [workbook overview](./workbookoverview.md) page.
+
+### List of Queries
+
+We have documented the source code of each of the queries. Here are the shortlinks for every one of them:
+
+- [Compute](/workbook/modules/Compute/compute.md)
+- [Azure Hybrid Benefit](/workbook/modules/AHUB/ahub.md)
+- [Storage](/workbook/modules/Storage/storage.md)
+- [Networking](/workbook/modules/Networking/networking.md)
+
+
+
 ## 👩‍💻 Contributing
 
 There are many ways to participate. From reporting bugs and requesting features or even making code changes. See the [contribution guide ➡️](./contributing.md)
