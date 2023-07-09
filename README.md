@@ -53,7 +53,7 @@ Stay up to date with the workbook latest changes and improvements:
 |v1.2.2| December/2022 | - Minor fix to the Storage Advisor query |
 |v1.3.0 | March /2023 | - Fixed Cost Information Tab |
 |v2.0.0 | March /2023 | - Added Azure Hybrid Benefit tab|
-|v2.1.0 |July /2023 | - Major improvement on filters -Added quick fix buttons |
+|v2.1.0 |July /2023 | - Major improvement on filters <br> -Added quick fix buttons <br> -Added Idle Virtual Network Gateways query|
 
 **Workbook v 2.1.0 has been integrated with Azure Advisor**
 
